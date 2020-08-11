@@ -47,81 +47,78 @@
 
     // What happens for each query.
 
-    if ($management == "displaysingle") 
-    {
-        echo '<form method="post" action="displaysingle.php">';
-        echo '<p><label for="table">Choose A table to display </label>';
-        echo '<select name="table" id="table">';
-        echo '<option value="none">Please Select</option>';
-        echo '<option value="league_data">League Data</option>';
-        echo '<option value="division_data">Division Data</option>';
-        echo '<option value="team_data">Team Data</option>';
-        echo '<option value="club_data">Club Data</option>';
-        echo '<option value="game_stats">Game Stats</option>';
-        echo '<option value="position_data">Position Data</option>';
-        echo '<option value="player_data">Player Data</option></select></p>';
-        echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+    switch($management){
+        case "displaysingle":
+            echo '<form method="post" action="displaysingle.php">';
+            echo '<p><label for="table">Choose A table to display </label>';
+            echo '<select name="table" id="table">';
+            echo '<option value="none">Please Select</option>';
+            echo '<option value="league_data">League Data</option>';
+            echo '<option value="division_data">Division Data</option>';
+            echo '<option value="team_data">Team Data</option>';
+            echo '<option value="club_data">Club Data</option>';
+            echo '<option value="game_stats">Game Stats</option>';
+            echo '<option value="position_data">Position Data</option>';
+            echo '<option value="player_data">Player Data</option></select></p>';
+            echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+    
+            if (isset($_POST["table"])) 
+            {
+                $table = $_POST["table"];
+            }
+        break;
 
-        if (isset($_POST["table"])) 
-        {
-            $table = $_POST["table"];
-        }
-    }
+        case "clubdata":
+            echo '<form method="post" action="clubsearch.php">';
+            echo '<p><label for ="clubnsearch">Enter Club Name </label>';
+            echo '<input type="text" name="clubsearch" id ="clubsearch"/></p>';
+            echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+    
+            if (isset($_POST["clubsearch"])) 
+            {
+                $clubsearch = $_POST["clubsearch"];
+            }
+        break;
 
-    if ($management == "clubdata")
-    {
-        echo '<form method="post" action="clubsearch.php">';
-        echo '<p><label for ="clubnsearch">Enter Club Name </label>';
-        echo '<input type="text" name="clubsearch" id ="clubsearch"/></p>';
-        echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+        case "displaydiv":
+            echo '<form method="post" action="divdisplay.php">';
+            echo '<p><label for ="divdisplay">Enter Divison eg (U17s, Seniors) </label>';
+            echo '<input type="text" name="divdisplay" id ="divdisplay"/></p>';
+            echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+    
+            if (isset($_POST["divdisplay"])) 
+            {
+                $clubsearch = $_POST["divdisplay"];
+            } 
+        break;
+        
+        case "countgames":
+            echo '<form method="post" action="countgames.php">';
+            echo '<p><label for ="countgames">What Team would you like to see a game count for? </label>';
+            echo '<input type="text" name="countgames" id ="countgames"/></p>';
+            echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+        break;
 
-        if (isset($_POST["clubsearch"])) 
-        {
-            $clubsearch = $_POST["clubsearch"];
-        }
-    }
+        case "displayplayers":
+            echo '<form method="post" action="displayplayers.php">';
+            echo '<p><label for ="displayplayers">What Team would you like to see players for? </label>';
+            echo '<input type="text" name="displayplayers" id ="displayplayers"/></p>';
+            echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+        break;
 
-    if ($management == "displaydiv")
-    {
-        echo '<form method="post" action="divdisplay.php">';
-        echo '<p><label for ="divdisplay">Enter Divison eg (U17s, Seniors) </label>';
-        echo '<input type="text" name="divdisplay" id ="divdisplay"/></p>';
-        echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+        case "displayposplay":
+            echo '<form method="post" action="displayposplay.php">';
+            echo '<p><label for="displayposplay">Choose A table to display </label>';
+            echo '<select name="displayposplay" id="table">';
+            echo '<option value="none">Please Select</option>';
+            echo '<option value="SF">Small Forward</option>';
+            echo '<option value="PG">Point Guard</option>';
+            echo '<option value="SG">Shooting Guard</option>';
+            echo '<option value="PF">Power Forward</option>';
+            echo '<option value="C">Centre</option></select></p>';
+            echo '<p><input type="submit" value="ShowMe!"/></form></p>';
+        break;
 
-        if (isset($_POST["divdisplay"])) 
-        {
-            $clubsearch = $_POST["divdisplay"];
-        }   
-    }
-
-    if ($management == "countgames")
-    {
-        echo '<form method="post" action="countgames.php">';
-        echo '<p><label for ="countgames">What Team would you like to see a game count for? </label>';
-        echo '<input type="text" name="countgames" id ="countgames"/></p>';
-        echo '<p><input type="submit" value="ShowMe!"/></form></p>';
-    }
-
-    if ($management =="displayplayers") //for displaying players via a searched team
-    {
-        echo '<form method="post" action="displayplayers.php">';
-        echo '<p><label for ="displayplayers">What Team would you like to see players for? </label>';
-        echo '<input type="text" name="displayplayers" id ="displayplayers"/></p>';
-        echo '<p><input type="submit" value="ShowMe!"/></form></p>';
-    }
-
-    if ($management=="displayposplay") // for displaying players via position.
-    {
-        echo '<form method="post" action="displayposplay.php">';
-        echo '<p><label for="displayposplay">Choose A table to display </label>';
-        echo '<select name="displayposplay" id="table">';
-        echo '<option value="none">Please Select</option>';
-        echo '<option value="SF">Small Forward</option>';
-        echo '<option value="PG">Point Guard</option>';
-        echo '<option value="SG">Shooting Guard</option>';
-        echo '<option value="PF">Power Forward</option>';
-        echo '<option value="C">Centre</option></select></p>';
-        echo '<p><input type="submit" value="ShowMe!"/></form></p>';
     }
 ?>
 
